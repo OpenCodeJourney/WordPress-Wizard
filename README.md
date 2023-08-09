@@ -52,15 +52,45 @@ Ensure your server meets the following requirements before executing the `wp-wiz
    sudo yum install epel-release
    sudo yum install certbot python3-certbot-apache
    ```
+   Configure:
+   ```bash
+   sudo mkdir -p /var/lib/letsencrypt/.well-known
+   sudo chgrp apache /var/lib/letsencrypt
+   sudo chmod g+s /var/lib/letsencrypt
+   cd /etc/httpd/conf.d/
+   ```
+   Create a Well-know.conf file:
+   ```bash
+   nano well-known.conf
+   ```
+   
+   Add below lines to Well-know.conf file:
+   ```bash
+   Alias /.well-known/acme-challenge/ "/var/lib/letsencrypt/.well-known/acme-chall>
+   <Directory "/var/lib/letsencrypt/">
+    AllowOverride None
+    Options MultiViews Indexes SymLinksIfOwnerMatch IncludesNoExec
+    Require method GET POST OPTIONS
+   </Directory>
+   ```
 
-5. **wget, curl, and unzip utilities**
+   Test the configuration:
+   ```bash
+   apachectl configtest
+   ```
+   
+
+
+
+   
+6. **wget, curl, and unzip utilities**
 
    Installation:
    ```bash
    sudo yum install wget curl unzip
    ```
 
-6. **PHP and Relevant Extensions**
+7. **PHP and Relevant Extensions**
 
    Installation:
    ```bash
