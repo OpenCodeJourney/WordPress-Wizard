@@ -16,7 +16,7 @@ echo "You are trying to Delete the website files, and DataBase for $DOMAIN this 
 echo "Make sure if you take the backup for $DOMAIN"
 read -p "Are you sure do you want to Continue and Delete the website files, and DataBase for $DOMAIN? (yes/no): " undo_website_setup
 
-if [ "$undo_website_setup" == "yes" || "$undo_website_setup" == "y" ]; then
+if [ "$undo_website_setup" == "yes" ]; then
 	# Check if the domain has a Let's Encrypt certificate
 	if [ -d "/etc/letsencrypt/live/$DOMAIN" ]; then
 		read -p "Do you want to revoke the SSL certificate for $DOMAIN? (yes/no): " revoke_response
